@@ -47,32 +47,22 @@ public class MyBinaryTree implements BinaryTree {
 	@Override
 	public void remove(int element) {
 		if (root == null) {
-			System.out.println("Root node is null");
+			System.out.println("The binary tree is empty, therefore can not remove an element.");
 			return;
 		}
 
-		Node currentNode = root;
-		boolean res = removeNode(currentNode, new Node(element));
-		System.out.println((res ? "Node removed: " : "Node not removed: ") + element);
+		root = removeNode(root, element);
 	}
 
-	private boolean removeNode(Node currentNode, Node nodeToRemove){
-		if (currentNode.getValue() == nodeToRemove.getValue()) {
-			if(currentNode.getLeft() != null)
-				currentNode = currentNode.getLeft();
-			else if (currentNode.getRight() != null)
-				currentNode = currentNode.getRight();
-			else
-				currentNode = null;
+	private Node removeNode(Node currentNode, int element) {
+		if (element < currentNode.getValue())
+			currentNode.setLeft(removeNode(currentNode.getLeft(), element));
+		else if (element > currentNode.getValue())
+			currentNode.setRight(removeNode(currentNode.getRight(), element));
+		else
+			return (currentNode.getLeft() != null) ? currentNode.getLeft() : null;
 
-			return true;
-		}
-
-		if (currentNode.getValue() > nodeToRemove.getValue()) {
-			return removeNode(currentNode.getLeft() != null ? currentNode.getLeft() : currentNode.getRight(), nodeToRemove);
-		} else {
-			return removeNode(currentNode.getRight() != null ? currentNode.getRight() : currentNode.getLeft(), nodeToRemove);
-		}
+		return currentNode;
 	}
 
 	@Override
