@@ -77,6 +77,16 @@ public class MyBinaryTree implements BinaryTree {
 
 	@Override
 	public void traverse(TraverseMethod method) {
+		switch(method){
+			case PREORDER -> preorder(root);
+		}
+	}
 
+	private void preorder(Node node) {
+		if(node == null) return;
+
+		System.out.print(node.getValue() + " ");
+		preorder(node.getLeft());
+		preorder(node.getRight());
 	}
 }
