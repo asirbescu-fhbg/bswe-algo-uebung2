@@ -16,11 +16,28 @@ class MyBinaryTreeTest {
 	void add() {
 		BinaryTree binaryTree = new MyBinaryTree();
 		binaryTree.add(12);
-		binaryTree.add(10);
+		binaryTree.add(14);
+		binaryTree.add(18);
+		binaryTree.add(11);
+		binaryTree.add(11);
+		binaryTree.add(8);
+		binaryTree.add(5);
+		binaryTree.add(2);
 	}
 
 	@Test
 	void remove() {
+		BinaryTree binaryTree = new MyBinaryTree();
+		binaryTree.add(12);
+		binaryTree.add(14);
+		binaryTree.add(18);
+		binaryTree.add(11);
+		binaryTree.add(8);
+		binaryTree.add(5);
+		binaryTree.add(2);
+
+		binaryTree.remove(11);
+		binaryTree.remove(2);
 	}
 
 	@Test
