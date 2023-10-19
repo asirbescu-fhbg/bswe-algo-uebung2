@@ -62,16 +62,14 @@ public class MyBinaryTree implements BinaryTree {
 			currentNode.setLeft(removeNode(currentNode.getLeft(), element));
 		else if (element > currentNode.getValue())
 			currentNode.setRight(removeNode(currentNode.getRight(), element));
-		else{
+		else {
 			if (currentNode.getLeft() != null && currentNode.getRight() != null) {
-				// Node has two children, replace with the in-order successor
 				Node rightNode = currentNode.getRight();
 				currentNode = currentNode.getLeft();
 				currentNode.setRight(rightNode);
-			} else {
-				// Node has one or no child, return the non-null child (or null if no child)
-				currentNode = (currentNode.getLeft() != null) ? currentNode.getLeft() : currentNode.getRight();
 			}
+			else
+				currentNode = (currentNode.getLeft() != null) ? currentNode.getLeft() : currentNode.getRight();
 		}
 
 		return currentNode;
