@@ -79,7 +79,67 @@ public class MyBinaryTree implements BinaryTree {
 	public void traverse(TraverseMethod method) {
 		switch(method){
 			case PREORDER -> preorder(root);
+			case INORDER -> inorder(root);
+			case POSTORDER -> postorder(root);
+			case LEVEL_ORDER -> levelorder(root);
 		}
+	}
+
+	private int treeHeight(Node node) {
+		if (node == null) {
+			return 0;
+		} else {
+			int lh = treeHeight(node.getLeft());
+			int rh = treeHeight(node.getRight());
+
+			if (lh > rh) {
+				return (lh + 1);
+			} else {
+				return (rh + 1);
+			}
+		}
+	}
+
+	private void levelorder(Node node) {
+
+		int max = treeHeight(node);
+		for (int i = 0; i < max; i++) {
+			printLevel(root, 0, i);
+		}
+	}
+
+	private void printLevel(Node node, int now, int dest){
+		if(node == null) return;
+
+		if(now == dest)
+			System.out.print(node.getValue() + " ");
+
+		printLevel(node.getLeft(), now + 1, dest);
+		printLevel(node.getRight(), now + 1, dest);
+	}
+
+	public void reset(){
+		root = null;
+		System.out.println("BinaryTree has been deleted.");
+	}
+
+	private void postorder(Node node){
+		if(node == null) return;
+
+		postorder(node.getLeft());
+		postorder(node.getRight());
+
+		System.out.print(node.getValue() + " ");
+	}
+
+	private void inorder(Node node) {
+		if(node == null) return;
+
+		inorder(node.getLeft());
+
+		System.out.print(node.getValue() + " ");
+
+		inorder(node.getRight());
 	}
 
 	private void preorder(Node node) {
