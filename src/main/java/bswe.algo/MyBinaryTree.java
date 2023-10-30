@@ -23,6 +23,15 @@ public class MyBinaryTree implements BinaryTree {
 		System.out.println((res ? "Node inserted: " : "Node not inserted: ") + element);
 	}
 
+	/**
+	 * Sets a node in the binary tree based on its value.
+	 * This is a private helper method that recursively finds the appropriate
+	 * position for inserting the element into the tree and inserts it.
+	 *
+	 * @param currentNode The current node being considered.
+	 * @param nodeToInsert The node to be inserted.
+	 * @return True if the node is successfully inserted, false if it already exists.
+	 */
 	private boolean setNode(Node currentNode, Node nodeToInsert){
 		if (currentNode.getValue() == nodeToInsert.getValue()) {
 			System.err.println("Node already exists");
@@ -54,6 +63,15 @@ public class MyBinaryTree implements BinaryTree {
 		root = removeNode(root, element);
 	}
 
+	/**
+	 * Removes a specified element from the binary tree.
+	 * This is a private helper method that recursively searches for and
+	 * removes the specified element from the tree.
+	 *
+	 * @param currentNode The current node being considered.
+	 * @param element The element to be removed.
+	 * @return The modified node structure after removal.
+	 */
 	private Node removeNode(Node currentNode, int element) {
 		if (currentNode == null)
 			return currentNode;
@@ -62,13 +80,19 @@ public class MyBinaryTree implements BinaryTree {
 			currentNode.setLeft(removeNode(currentNode.getLeft(), element));
 		else if (element > currentNode.getValue())
 			currentNode.setRight(removeNode(currentNode.getRight(), element));
+
+		/** If the element is neither smaller nor greater than the currentNode,
+		 * then we have found the element to be removed. */
 		else {
+			// checks if the currentNode (= element) has two children and sets the currentNode to its left subtree
+			// and sets the right subtree of the NEW currentNode to the original rightNode
 			if (currentNode.getLeft() != null && currentNode.getRight() != null) {
 				Node rightNode = currentNode.getRight();
 				currentNode = currentNode.getLeft();
 				currentNode.setRight(rightNode);
 			}
 			else
+				// if there is a child, then NEW currentNode = the value of its child, else null
 				currentNode = (currentNode.getLeft() != null) ? currentNode.getLeft() : currentNode.getRight();
 		}
 
@@ -108,14 +132,24 @@ public class MyBinaryTree implements BinaryTree {
 		}
 	}
 
+	/**
+	 * Prints the nodes at a specific level of the binary tree.
+	 * This method recursively traverses the tree to find and print nodes at the specified level.
+	 *
+	 * @param node The current node being considered.
+	 * @param now  The current level of the node.
+	 * @param dest The target level to print nodes.
+	 */
 	private void printLevel(Node node, int now, int dest){
 		if(node == null) return;
 
 		if(now == dest)
 			System.out.print(node.getValue() + " ");
 
+		if(now < dest) {
 		printLevel(node.getLeft(), now + 1, dest);
 		printLevel(node.getRight(), now + 1, dest);
+		}
 	}
 
 	public void reset(){
