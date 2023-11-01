@@ -11,10 +11,21 @@ public class MyBinaryTree implements BinaryTree {
 
 	Node root = null;
 
+	/**
+	 * Creates a new instance of the MyBinaryTree class.
+	 */
+	public MyBinaryTree(){}
+
+	/**
+	 * Adds the given element to the binary tree.
+	 * @param element The element to add.
+	 */
 	@Override
 	public void add(int element) {
 		if (root == null) {
 			root = new Node(element);
+			System.out.println("Root node created: " + element);
+
 			return;
 		}
 
@@ -34,7 +45,7 @@ public class MyBinaryTree implements BinaryTree {
 	 */
 	private boolean setNode(Node currentNode, Node nodeToInsert){
 		if (currentNode.getValue() == nodeToInsert.getValue()) {
-			System.err.println("Node already exists");
+			System.out.println("Node already exists");
 			return false;
 		}
 
@@ -53,6 +64,10 @@ public class MyBinaryTree implements BinaryTree {
 		return true;
 	}
 
+	/**
+	 * Removes the given element from the Binary Tree.
+	 * @param element The element to remove.
+	 */
 	@Override
 	public void remove(int element) {
 		if (root == null) {
@@ -94,11 +109,17 @@ public class MyBinaryTree implements BinaryTree {
 			else
 				// if there is a child, then NEW currentNode = the value of its child, else null
 				currentNode = (currentNode.getLeft() != null) ? currentNode.getLeft() : currentNode.getRight();
+
+			System.out.println("Successfully removed element: " + element);
 		}
 
 		return currentNode;
 	}
 
+	/**
+	 * Output the numbers following the given traverse method.
+	 * @param method The traverse method to use.
+	 */
 	@Override
 	public void traverse(TraverseMethod method) {
 		switch(method){
@@ -109,6 +130,11 @@ public class MyBinaryTree implements BinaryTree {
 		}
 	}
 
+	/**
+	 * Calculates the height of the current binary tree.
+	 * @param node The root node.
+	 * @return Returns the height of the tree.
+	 */
 	private int treeHeight(Node node) {
 		if (node == null) {
 			return 0;
@@ -124,6 +150,10 @@ public class MyBinaryTree implements BinaryTree {
 		}
 	}
 
+	/**
+	 * Prints the binary tree following the level order traverse method.
+	 * @param node The root node.
+	 */
 	private void levelorder(Node node) {
 
 		int max = treeHeight(node);
@@ -152,11 +182,18 @@ public class MyBinaryTree implements BinaryTree {
 		}
 	}
 
+	/**
+	 * Sets the root node of the binary tree to null and therefore resets the tree.
+	 */
 	public void reset(){
 		root = null;
 		System.out.println("BinaryTree has been deleted.");
 	}
 
+	/**
+	 * Prints the tree following the post order traverse method.
+	 * @param node The root node.
+	 */
 	private void postorder(Node node){
 		if(node == null) return;
 
@@ -166,6 +203,10 @@ public class MyBinaryTree implements BinaryTree {
 		System.out.print(node.getValue() + " ");
 	}
 
+	/**
+	 * Prints the tree following the inorder traverse method.
+	 * @param node The root node.
+	 */
 	private void inorder(Node node) {
 		if(node == null) return;
 
@@ -176,6 +217,10 @@ public class MyBinaryTree implements BinaryTree {
 		inorder(node.getRight());
 	}
 
+	/**
+	 * Prints the tree following the preorder traverse method.
+	 * @param node The root node.
+	 */
 	private void preorder(Node node) {
 		if(node == null) return;
 

@@ -7,6 +7,9 @@
 
 package bswe.algo;
 
+/**
+ * This enum defines the possible traverse methods for the binary tree.
+ */
 public enum TraverseMethod {
 
 	PREORDER,

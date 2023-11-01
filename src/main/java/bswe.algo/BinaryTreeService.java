@@ -7,25 +7,46 @@
 
 package bswe.algo;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Scanner;
 
 public class BinaryTreeService {
 
 	public static void main(String[] args) {
 
-		MyBinaryTree binaryTree = new MyBinaryTree();
+		Scanner scanner = new Scanner(System.in);
+		InputHandler inputHandler = new InputHandler();
+		MyBinaryTree binaryTree = inputHandler.createBinaryTree();
 
-		Path path = Paths.get("src/main" +
-				"/resources", "numbers.csv");
+		boolean keepAsking = true;
+		while (keepAsking) {
 
-		FileUtil fu = new FileUtil();
-		fu.addNumbersFromFile(binaryTree, path);
+			String menuTraverse = "\n\n" + """
+					Please select an option:
+					
+					1 - PREORDER
+					2 - INORDER
+					3 - POSTORDER
+					4 - LEVEL_ORDER
+					5 - REMOVE ELEMENT
+					6 - NEW BINARY-TREE
+					7 - EXIT
+					""";
+			System.out.println(menuTraverse);
+			String traverseChoice = scanner.nextLine();
+			switch (traverseChoice) {
+				case "1" -> binaryTree.traverse(TraverseMethod.PREORDER);
+				case "2" -> binaryTree.traverse(TraverseMethod.INORDER);
+				case "3" -> binaryTree.traverse(TraverseMethod.POSTORDER);
+				case "4" -> binaryTree.traverse(TraverseMethod.LEVEL_ORDER);
+				case "5" -> inputHandler.addOrRemoveNumbersFromUserInput(binaryTree, false);
+				case "6" -> binaryTree = inputHandler.createBinaryTree();
+				case "7" -> keepAsking = false;
+				default -> System.err.println("Invalid choice: " + traverseChoice + " - Try again ...");
+			}
+		}
 
-		binaryTree.traverse(TraverseMethod.INORDER);
-
+		System.out.println("Closing Application ...");
 	}
-
 }

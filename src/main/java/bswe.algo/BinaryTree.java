@@ -8,7 +8,6 @@
 package bswe.algo;
 
 interface BinaryTree {
-
 	void add(int element);
 	void remove(int element);
 	void traverse(TraverseMethod method);

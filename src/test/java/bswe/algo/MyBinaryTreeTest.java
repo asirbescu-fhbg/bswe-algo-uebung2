@@ -71,24 +71,49 @@ class MyBinaryTreeTest {
 
 	@Test
 	void remove() {
+		binaryTree.traverse(TraverseMethod.INORDER);
+
+		String outputBefore = TestHelper.outputStreamCaptor.toString();
+		Assertions.assertTrue(outputBefore.contains("2 3 5 7 8 12 13 14 15 16 17 18 20 22 24"));
+
 		binaryTree.remove(16);
 		binaryTree.remove(2);
+
+		binaryTree.traverse(TraverseMethod.INORDER);
+
+		String output = TestHelper.outputStreamCaptor.toString();
+		Assertions.assertTrue(output.contains("3 5 7 8 12 13 14 15 17 18 20 22 24"));
 	}
 
 	@Test
 	void preorder() {
 		binaryTree.traverse(TraverseMethod.PREORDER);
+
+		String output = TestHelper.outputStreamCaptor.toString();
+		Assertions.assertTrue(output.contains("12 8 7 3 2 5 16 15 14 13 18 17 20 22 24"));
 	}
 
 	@Test
 	void inorder() {
 		binaryTree.traverse(TraverseMethod.INORDER);
+
+		String output = TestHelper.outputStreamCaptor.toString();
+		Assertions.assertTrue(output.contains("2 3 5 7 8 12 13 14 15 16 17 18 20 22 24"));
 	}
 
 	@Test
 	void levelorder() {
 		binaryTree.traverse(TraverseMethod.LEVEL_ORDER);
+
 		String output = TestHelper.outputStreamCaptor.toString();
 		Assertions.assertTrue(output.contains("12 8 16 7 15 18 3 14 17 20 2 5 13 22 24 "));
+	}
+
+	@Test
+	void postorder() {
+		binaryTree.traverse(TraverseMethod.POSTORDER);
+
+		String output = TestHelper.outputStreamCaptor.toString();
+		Assertions.assertTrue(output.contains("2 5 3 7 8 13 14 15 17 24 22 20 18 16 12"));
 	}
 }
